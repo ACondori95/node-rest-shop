@@ -2,9 +2,14 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+dotenv.config();
+const mongoose = require("mongoose");
 
 const productRoutes = require("./api/routes/products");
 const orderRoutes = require("./api/routes/orders");
+
+mongoose.connect(process.env.MONGODB_URI);
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({extended: false}));
